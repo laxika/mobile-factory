@@ -1,5 +1,7 @@
 package com.example.mobileservice.mobile;
 
+import com.example.mobileservice.mobile.Mobile.MobileBuilder;
+
 import java.util.Random;
 
 public class MobileFactory {
@@ -9,21 +11,22 @@ public class MobileFactory {
     public Mobile newRandomMobile() {
         Manufacturer manufacturer = Manufacturer.values()[random.nextInt(Manufacturer.values().length)];
 
-        Mobile mobile = new Mobile();
+        MobileBuilder mobileBuilder = new MobileBuilder();
 
-        mobile.setManufacturer(manufacturer);
-        mobile.setModel(manufacturer.getModelList()[random.nextInt(manufacturer.getModelList().length)]);
+        String model = manufacturer.getModelList()[random.nextInt(manufacturer.getModelList().length)];
+
+        mobileBuilder.setManufacturer(manufacturer);
+        mobileBuilder.setModel(model);
 
         for (PartType type : PartType.values()) {
-            mobile.setDisplay(new Part(PartType.DISPLAY, random.nextBoolean(), manufacturer.getName() + " Display"));
+            //TODO: remove this if
+            if (type == PartType.MOTHERBOARD) {
+                mobileBuilder.setPart(type, new Part(PartType.MOTHERBOARD, random.nextBoolean(), manufacturer.getName() + " " + model + " " + type.getName()));
+            } else {
+                mobileBuilder.setPart(type, new Part(type, random.nextBoolean(), manufacturer.getName() + " " + type.getName()));
+            }
         }
-        mobile.setDisplay(new Part(PartType.DISPLAY, random.nextBoolean(), manufacturer.getName() + " Display"));
-        mobile.setMicrophone(new Part(PartType.MICROPHONE, random.nextBoolean(), manufacturer.getName() + " Microphone"));
-        mobile.setMotherBoard(new Part(PartType.MOTHERBOARD, random.nextBoolean(), manufacturer.getName() + " " + mobile.getModel() + " Motherboard"));
-        mobile.setPowerSwitch(new Part(PartType.POWER_SWITCH, random.nextBoolean(), manufacturer.getName() + " Power Switch"));
-        mobile.setSpeaker(new Part(PartType.SPEAKER, random.nextBoolean(), manufacturer.getName() + " Speaker"));
-        mobile.setVolumeButtons(new Part(PartType.VOLUME_BUTTONS, random.nextBoolean(), manufacturer.getName() + " Volume Buttons"));
 
-        return mobile;
+        return mobileBuilder.createMobile();
     }
 }

@@ -3,12 +3,17 @@ package com.example.mobileservice.mobile;
 import java.util.HashMap;
 
 public class Mobile {
+
     private Manufacturer manufacturer;
-
     private HashMap<PartType, Part> partMap = new HashMap<>();
-
     private String model;
     private String otherInfo;
+
+    private Mobile(Manufacturer manufacturer, String model, HashMap<PartType, Part> partMap) {
+        this.manufacturer = manufacturer;
+        this.model = model;
+        this.partMap = partMap;
+    }
 
     public Manufacturer getManufacturer() {
         return manufacturer;
@@ -24,6 +29,10 @@ public class Mobile {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public void setPart(PartType partType, Part partValue) {
+        this.partMap.put(partType, partValue);
     }
 
     public Part getDisplay() {
@@ -93,5 +102,28 @@ public class Mobile {
     @Override
     public String toString() {
         return getManufacturer() + " " + getModel() + ", other Info: " + getOtherInfo();
+    }
+
+    public static class MobileBuilder {
+
+        private HashMap<PartType, Part> partMap = new HashMap<>();
+        private String model;
+        private Manufacturer manufacturer;
+
+        public void setManufacturer(Manufacturer manufacturer) {
+            this.manufacturer = manufacturer;
+        }
+
+        public void setModel(String model) {
+            this.model = model;
+        }
+
+        public void setPart(PartType partType, Part partValue) {
+            this.partMap.put(partType, partValue);
+        }
+
+        public Mobile createMobile() {
+            return new Mobile(manufacturer, model, partMap);
+        }
     }
 }
