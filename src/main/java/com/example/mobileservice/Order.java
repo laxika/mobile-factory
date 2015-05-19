@@ -1,5 +1,7 @@
 package com.example.mobileservice;
 
+import com.example.mobileservice.mobile.PartType;
+
 public class Order {
 
     private long id;

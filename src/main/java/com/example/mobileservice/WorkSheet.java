@@ -1,5 +1,8 @@
 package com.example.mobileservice;
 
+import com.example.mobileservice.mobile.Mobile;
+import com.example.mobileservice.mobile.Part;
+
 import java.util.ArrayList;
 import java.util.Date;
 

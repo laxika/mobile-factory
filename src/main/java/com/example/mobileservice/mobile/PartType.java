@@ -4,14 +4,17 @@
  * and open the template in the editor.
  */
 
-package com.example.mobileservice;
+package com.example.mobileservice.mobile;
 
 /**
  * @author vrg
  */
-public enum Manufacturer {
-    SAMSUNG,
-    APPLE,
-    HTC,
-    HUAWEI
+public enum PartType {
+    DISPLAY,
+    KEYBOARD,
+    MOTHERBOARD,
+    MICROPHONE,
+    SPEAKER,
+    VOLUME_BUTTONS,
+    POWER_SWITCH
 }

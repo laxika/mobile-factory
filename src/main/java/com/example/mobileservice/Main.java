@@ -1,5 +1,6 @@
 package com.example.mobileservice;
 
+import com.example.mobileservice.mobile.MobileService;
 import com.example.mobileservice.supplier.Supplier;
 
 import java.util.ArrayList;

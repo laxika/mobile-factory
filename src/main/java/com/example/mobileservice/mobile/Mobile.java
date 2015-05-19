@@ -1,4 +1,4 @@
-package com.example.mobileservice;
+package com.example.mobileservice.mobile;
 
 /**
  * @author vrg

@@ -1,5 +1,8 @@
 package com.example.mobileservice;
 
+import com.example.mobileservice.mobile.Part;
+import com.example.mobileservice.mobile.PartType;
+
 /**
  * @author vrg
  */

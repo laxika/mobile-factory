@@ -1,5 +1,6 @@
-package com.example.mobileservice;
+package com.example.mobileservice.mobile;
 
+import com.example.mobileservice.*;
 import com.example.mobileservice.supplier.Supplier;
 
 import java.util.*;
