@@ -23,7 +23,15 @@ public class Order {
         return status;
     }
 
-    public void setStatus(Status newStatus) {
+    public void nextStatus() {
+        if (status.ordinal() == Status.values().length) {
+            throw new IllegalStateException("Already reached the last status step.");
+        }
+
+        status = Status.values()[status.ordinal() + 1];
+    }
+
+    /*public void setStatus(Status newStatus) {
         switch (newStatus) {
             case ORDERED:
                 if (status != Status.WAITING_FOR_ORDER) {
@@ -44,7 +52,7 @@ public class Order {
                 throw new IllegalStateException("Illegal state transition: " + status + " -> " + newStatus);
         }
         status = newStatus;
-    }
+    }*/
 
     public PartType getType() {
         return type;
@@ -73,6 +81,4 @@ public class Order {
         READY_FOR_SHIPMENT,
         SHIPPED
     }
-
-
 }

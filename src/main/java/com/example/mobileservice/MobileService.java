@@ -146,10 +146,10 @@ public class MobileService {
     public synchronized void pollSupplier() {
         if (!orderIdByPartType.isEmpty()) {
             List<Order> orderIds = new ArrayList<>(orderIdByPartType.values());
-            for (Order orderId : orderIds) {
-                if (orderId != null) {
-                    if (supplier.isReadyForShipment(orderId)) {
-                        Order shippedOrder = supplier.shipOrder(orderId);
+            for (Order order : orderIds) {
+                if (order != null) {
+                    if (supplier.isReadyForShipment(order)) {
+                        Order shippedOrder = supplier.shipOrder(order);
                         stock.put(shippedOrder.getType(), shippedOrder.getQuantity());
                         orderIdByPartType.remove(shippedOrder.getType());
                     }

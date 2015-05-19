@@ -15,11 +15,11 @@ public class Supplier {
         this.taskScheduler = taskScheduler;
     }
 
-    public Long orderPart(Order order) {
+    public void orderPart(Order order) {
         logger.info("New order: " + order);
+
         taskScheduler.scheduleTaskToRandomTime(new SatisfyOrderNeedsTask(order), 1, 10, TimeUnit.SECONDS);
-        order.setStatus(Order.Status.ORDERED);
-        return order.getId();
+        order.nextStatus();
     }
 
     public boolean isReadyForShipment(Order order) {
@@ -27,11 +27,8 @@ public class Supplier {
     }
 
     public Order shipOrder(Order order) {
-        try {
-            order.setStatus(Order.Status.SHIPPED);
-        } catch (IllegalStateException ex) {
-            throw new IllegalArgumentException("Order should be in READY_FOR_SHIPMENT state in order to be shipped successfully.", ex);
-        }
+        order.nextStatus();
+
         System.out.println("Order shipped: " + order);
         return order;
     }
