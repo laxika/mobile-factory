@@ -1,7 +1,7 @@
 package com.example.mobileservice.mobile;
 
 public enum Manufacturer {
-    
+
     SAMSUNG(
             "Samsung",
             new String[] {"Galaxy S3", "Galaxy S4", "Galaxy Note"}

@@ -1,12 +1,15 @@
 package com.example.mobileservice;
 
 import com.example.mobileservice.mobile.*;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public final class Client {
+
+    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(Client.class);
 
     private final static AtomicLong counter = new AtomicLong();
     private final static MobileFactory mobileFactory = new MobileFactory();
@@ -19,12 +22,8 @@ public final class Client {
         this.mobile = mobileFactory.newRandomMobile();
     }
 
-    public void log(String message) {
-        System.out.println("Client #" + id + ": " + message);
-    }
-
     public void sendMobileToService() {
-        log("Sending in mobile: " + mobile);
+        logger.info("Client #" + id + ": " + "Sending in mobile: " + mobile);
         WorkSheet workSheet = service.sendIn(mobile);
         WorkSheet.Status lastKnownStatus = workSheet.status;
         while (lastKnownStatus != WorkSheet.Status.FINISHED) {
@@ -35,7 +34,7 @@ public final class Client {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            log("Status changed to " + workSheet.status);
+            logger.info("Client #" + id + ": " + "Status changed to " + workSheet.status);
             lastKnownStatus = workSheet.status;
         }
     }
