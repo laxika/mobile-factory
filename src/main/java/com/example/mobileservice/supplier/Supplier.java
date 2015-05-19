@@ -11,7 +11,7 @@ public class Supplier {
 
     private final TaskScheduler taskScheduler = new TaskScheduler();
 
-    public void orderPart(final Order order) {
+    public void orderPart(Order order) {
         logger.info("New order: " + order);
 
         taskScheduler.executeTask(order::nextStatus);
@@ -19,14 +19,7 @@ public class Supplier {
         order.nextStatus();
     }
 
-    public boolean isReadyForShipment(Order order) {
+    public boolean isOrderArrived(Order order) {
         return order.getStatus() == Order.Status.READY_FOR_SHIPMENT;
     }
-
-    public void shipOrder(Order order) {
-        logger.info("Order shipped: " + order);
-
-        order.nextStatus();
-    }
-
 }

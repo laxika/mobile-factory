@@ -2,21 +2,20 @@ package com.example.mobileservice.mobile;
 
 import com.example.mobileservice.*;
 import com.example.mobileservice.supplier.Supplier;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * @author vrg
- */
 public class MobileService {
 
+    private static final Logger logger = LogManager.getLogger(MobileService.class);
     private static final AtomicLong counter = new AtomicLong();
 
     private HashMap<PartType, Integer> stock = new HashMap<>();
     private List<WorkSheet> worksheetsToProcess = new ArrayList<>();
 
-    //REFACT LOG: Long contains the order id, replace it with the actual order
     private Map<PartType, Order> orderIdByPartType = new HashMap<>();
     private Supplier supplier;
 
@@ -149,8 +148,11 @@ public class MobileService {
             List<Order> orderIds = new ArrayList<>(orderIdByPartType.values());
             for (Order order : orderIds) {
                 if (order != null) {
-                    if (supplier.isReadyForShipment(order)) {
-                        supplier.shipOrder(order);
+                    if (supplier.isOrderArrived(order)) {
+                        logger.info("Order shipped: " + order);
+
+                        order.nextStatus();
+
                         stock.put(order.getType(), order.getQuantity());
                         orderIdByPartType.remove(order.getType());
                     }
