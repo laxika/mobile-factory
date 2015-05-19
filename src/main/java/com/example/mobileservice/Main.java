@@ -1,7 +1,6 @@
 package com.example.mobileservice;
 
 import com.example.mobileservice.supplier.Supplier;
-import com.example.mobileservice.supplier.TaskScheduler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,7 @@ public class Main {
     private Supplier supplier;
 
     public Main() {
-        supplier = new Supplier(TaskScheduler.INSTANCE);
+        supplier = new Supplier();
         mobileService = new MobileService(supplier);
         for (int i = 0; i < 100; i++) {
             Client client = new Client(mobileService);
