@@ -149,9 +149,9 @@ public class MobileService {
             for (Order order : orderIds) {
                 if (order != null) {
                     if (supplier.isReadyForShipment(order)) {
-                        Order shippedOrder = supplier.shipOrder(order);
-                        stock.put(shippedOrder.getType(), shippedOrder.getQuantity());
-                        orderIdByPartType.remove(shippedOrder.getType());
+                        supplier.shipOrder(order);
+                        stock.put(order.getType(), order.getQuantity());
+                        orderIdByPartType.remove(order.getType());
                     }
                 }
             }

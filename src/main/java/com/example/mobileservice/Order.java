@@ -1,8 +1,5 @@
 package com.example.mobileservice;
 
-/**
- * @author vrg
- */
 public class Order {
 
     private long id;
@@ -13,10 +10,6 @@ public class Order {
     public Order(long id) {
         this.id = id;
         this.status = Status.WAITING_FOR_ORDER;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public Status getStatus() {
@@ -30,29 +23,6 @@ public class Order {
 
         status = Status.values()[status.ordinal() + 1];
     }
-
-    /*public void setStatus(Status newStatus) {
-        switch (newStatus) {
-            case ORDERED:
-                if (status != Status.WAITING_FOR_ORDER) {
-                    throw new IllegalStateException("Illegal state transition: " + status + " -> " + newStatus);
-                }
-                break;
-            case READY_FOR_SHIPMENT:
-                if (status != Status.ORDERED) {
-                    throw new IllegalStateException("Illegal state transition: " + status + " -> " + newStatus);
-                }
-                break;
-            case SHIPPED:
-                if (status != Status.READY_FOR_SHIPMENT) {
-                    throw new IllegalStateException("Illegal state transition: " + status + " -> " + newStatus);
-                }
-                break;
-            default:
-                throw new IllegalStateException("Illegal state transition: " + status + " -> " + newStatus);
-        }
-        status = newStatus;
-    }*/
 
     public PartType getType() {
         return type;

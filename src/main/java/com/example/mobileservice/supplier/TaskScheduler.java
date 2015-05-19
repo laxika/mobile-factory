@@ -20,13 +20,17 @@ public enum TaskScheduler {
         return executorService.schedule(task, delay, timeUnit);
     }
 
-    public ScheduledFuture<?> scheduleTaskToRandomTime(Runnable task, long minDelay, long maxDelay, TimeUnit timeUnit) {
+    public void scheduleSatisfyOrderNeedsTask(SatisfyOrderNeedsTask task) {
+        scheduleTaskToRandomTime(task, 1, 10);
+    }
+
+    private ScheduledFuture<?> scheduleTaskToRandomTime(Runnable task, long minDelay, long maxDelay) {
 
         long variance = maxDelay - minDelay;
 
         long delay = minDelay + random.nextInt((int) variance);
 
-        return scheduleTask(task, delay, timeUnit);
+        return scheduleTask(task, delay, TimeUnit.SECONDS);
     }
 
 }
