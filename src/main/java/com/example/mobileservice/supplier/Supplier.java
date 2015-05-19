@@ -1,15 +1,14 @@
 package com.example.mobileservice.supplier;
 
 import com.example.mobileservice.Order;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Supplier {
 
-    private Map<Long, Order> orderById = new HashMap<>();
-
+    private static final Logger logger = LogManager.getLogger(Supplier.class);
     private final TaskScheduler taskScheduler;
 
     public Supplier(TaskScheduler taskScheduler) {
@@ -17,8 +16,7 @@ public class Supplier {
     }
 
     public Long orderPart(Order order) {
-        orderById.put(order.getId(), order);
-        System.out.println("New order: " + order);
+        logger.info("New order: " + order);
         taskScheduler.scheduleTaskToRandomTime(new SatisfyOrderNeedsTask(order), 1, 10, TimeUnit.SECONDS);
         order.setStatus(Order.Status.ORDERED);
         return order.getId();
