@@ -102,26 +102,26 @@ public class MobileService {
 
         Mobile mobile = sheet.mobile;
 
-        if (mobile.display.failing) {
-            addPartToReplace(sheet, mobile.display);
+        if (mobile.getDisplay().failing) {
+            addPartToReplace(sheet, mobile.getDisplay());
         }
-        if (mobile.keyboard != null && mobile.keyboard.failing) {
-            addPartToReplace(sheet, mobile.keyboard);
+        if (mobile.getKeyboard() != null && mobile.getKeyboard().failing) {
+            addPartToReplace(sheet, mobile.getKeyboard());
         }
-        if (mobile.microphone.failing) {
-            addPartToReplace(sheet, mobile.microphone);
+        if (mobile.getMicrophone().failing) {
+            addPartToReplace(sheet, mobile.getMicrophone());
         }
-        if (mobile.motherBoard.failing) {
-            addPartToReplace(sheet, mobile.motherBoard);
+        if (mobile.getMotherBoard().failing) {
+            addPartToReplace(sheet, mobile.getMotherBoard());
         }
-        if (mobile.powerSwitch.failing) {
-            addPartToReplace(sheet, mobile.powerSwitch);
+        if (mobile.getPowerSwitch().failing) {
+            addPartToReplace(sheet, mobile.getPowerSwitch());
         }
-        if (mobile.speaker.failing) {
-            addPartToReplace(sheet, mobile.speaker);
+        if (mobile.getSpeaker().failing) {
+            addPartToReplace(sheet, mobile.getSpeaker());
         }
-        if (mobile.volumeButtons.failing) {
-            addPartToReplace(sheet, mobile.volumeButtons);
+        if (mobile.getVolumeButtons().failing) {
+            addPartToReplace(sheet, mobile.getVolumeButtons());
         }
     }
 
